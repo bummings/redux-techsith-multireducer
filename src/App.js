@@ -9,13 +9,17 @@ class App extends Component {
         <div className="col">
           <span>A:</span>
           <span>{this.props.a}</span>
-          <button onClick={this.props.updateA}>Update A</button>
+          <button onClick={() => this.props.updateA(this.props.b)}>
+            Update A
+          </button>
         </div>
 
         <div className="col">
           <span>B:</span>
           <span>{this.props.b}</span>
-          <button onClick={this.props.updateB}>Update B</button>
+          <button onClick={() => this.props.updateB(this.props.a)}>
+            Update B
+          </button>
         </div>
       </div>
     );
@@ -24,15 +28,15 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    a: state.a,
-    b: state.b
+    a: state.rA.a,
+    b: state.rB.b
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateA: () => dispatch({ type: "UPDATE_A" }),
-    updateB: () => dispatch({ type: "UPDATE_B" })
+    updateA: b => dispatch({ type: "UPDATE_A", b: b }),
+    updateB: a => dispatch({ type: "UPDATE_B", a: a })
   };
 };
 
